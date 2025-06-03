@@ -8,9 +8,11 @@ namespace Trell.VehicleGame.Infrastructure.States
     public class LoadGameState : BaseStateWithoutPayload
     {
         private readonly ISceneService _sceneService;
+        private IGameFactory _factory;
 
-        public LoadGameState(StateMachine machine, ISceneService sceneService) : base(machine)
+        public LoadGameState(StateMachine machine, ISceneService sceneService, IGameFactory factory) : base(machine)
         {
+            _factory = factory;
             _sceneService = sceneService;
         }
 
@@ -23,6 +25,7 @@ namespace Trell.VehicleGame.Infrastructure.States
         {
             try
             {
+                _factory.CreateCar();
                 GoToState<GameLoopState>();
             }
             catch (Exception e)

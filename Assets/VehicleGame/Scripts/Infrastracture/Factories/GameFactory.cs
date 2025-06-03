@@ -1,4 +1,7 @@
+using System.Threading.Tasks;
+using Trell.VehicleGame.Gameplay.Car;
 using Trell.VehicleGame.Infrastructure.AssetManagment;
+using UnityEngine;
 using Zenject;
 
 namespace Trell.VehicleGame.Infrastructure.Factories
@@ -15,6 +18,17 @@ namespace Trell.VehicleGame.Infrastructure.Factories
             _staticDataService = staticDataService;
         }
 
+        public async Task<CarFacade> CreateCar()
+        {
+            CarData carData = _staticDataService.GetCarData();
+            GameObject prefab = await _assetProvider.Load<GameObject>(carData.AssetReference);
+            
+            CarFacade carFacade = Object.Instantiate(prefab).GetComponent<CarFacade>();
+            carFacade.CarMovement.Init(carData.Speed);
+            
+            return carFacade;
+        }
+        
         public void CleanUp()
         {
           

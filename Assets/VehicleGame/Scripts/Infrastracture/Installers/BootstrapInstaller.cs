@@ -6,11 +6,21 @@ using Zenject;
 
 public class BootstrapInstaller : MonoInstaller
 {
+    [SerializeField] private StaticDataService _staticDataService;
+    
     public override void InstallBindings()
     {
         BindSceneService();
         BindAssetProvider();
+        BindStaticDataService();
         BindGameFactory();
+    }
+
+    private void BindStaticDataService()
+    {
+        Container.Bind<IStaticDataService>()
+            .FromInstance(_staticDataService)
+            .AsSingle();
     }
 
     private void BindGameFactory()
