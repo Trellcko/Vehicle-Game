@@ -1,6 +1,7 @@
 using Trell.VehicleGame.Infrastructure;
 using Trell.VehicleGame.Infrastructure.AssetManagment;
 using Trell.VehicleGame.Infrastructure.Factories;
+using Trell.VehicleGame.Infrastructure.Input;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,13 @@ public class BootstrapInstaller : MonoInstaller
         BindAssetProvider();
         BindStaticDataService();
         BindGameFactory();
+        BindInput();
+    }
+
+    private void BindInput()
+    {
+        Container.BindInterfacesTo<TouchInput>()
+            .AsSingle();
     }
 
     private void BindStaticDataService()
