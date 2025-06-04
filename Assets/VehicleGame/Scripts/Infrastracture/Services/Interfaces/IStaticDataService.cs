@@ -1,4 +1,4 @@
-﻿using Trell.VehicleGame.Gameplay.Car;
+﻿using Trell.VehicleGame.GamePlay.Car;
 
 namespace Trell.VehicleGame.Infrastructure
 {

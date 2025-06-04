@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: CarData
   m_EditorClassIdentifier: 
   <AssetReference>k__BackingField:
-    m_AssetGUID: 
+    m_AssetGUID: 946c018447d746540b5ec1d88c8eb65d
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  <Speed>k__BackingField: 2
+  <Speed>k__BackingField: 6

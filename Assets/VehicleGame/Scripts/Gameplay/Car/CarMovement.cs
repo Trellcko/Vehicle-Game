@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Trell.VehicleGame.Gameplay.Car
+namespace Trell.VehicleGame.GamePlay.Car
 {
     public class CarMovement : MonoBehaviour
     {

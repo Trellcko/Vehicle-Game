@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using Trell.VehicleGame.Gameplay.Car;
+using Trell.VehicleGame.GamePlay.Car;
 using Trell.VehicleGame.Infrastructure.AssetManagment;
 using UnityEngine;
 using Zenject;

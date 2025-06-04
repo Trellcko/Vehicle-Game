@@ -1,4 +1,4 @@
-using Trell.VehicleGame.Gameplay.Car;
+using Trell.VehicleGame.GamePlay.Car;
 using UnityEngine;
 
 namespace Trell.VehicleGame.Infrastructure
