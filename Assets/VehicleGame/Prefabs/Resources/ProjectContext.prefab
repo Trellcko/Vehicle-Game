@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _carData: {fileID: 11400000, guid: cb904b1575fffd84ea23cc06115d8753, type: 2}
+  _zombieData: {fileID: 11400000, guid: 9d4cb379e60919949adfafc997666eb7, type: 2}
 --- !u!1 &7710491242512808179
 GameObject:
   m_ObjectHideFlags: 0

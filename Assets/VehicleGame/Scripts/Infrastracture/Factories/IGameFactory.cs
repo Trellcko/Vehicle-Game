@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Trell.VehicleGame.GamePlay.Car;
+using Trell.VehicleGame.GamePlay.Zombie;
+using UnityEngine;
 
 namespace Trell.VehicleGame.Infrastructure.Factories
 {
@@ -9,5 +11,6 @@ namespace Trell.VehicleGame.Infrastructure.Factories
         void CleanUp();
         event Action<CarFacade> CarCreated;
         Task<CarFacade> CreateCar();
+        Task<ZombieFacade> CreateZombie(Vector3 position);
     }
 }
