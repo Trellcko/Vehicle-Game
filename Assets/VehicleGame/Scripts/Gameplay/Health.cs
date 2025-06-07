@@ -18,6 +18,11 @@ namespace Trell.VehicleGame.GamePlay
 		{
 			TakeDamage(10);
 		}
+
+		public void Release()
+		{
+			CurrentHealth = MaxHealth;
+		}
 		
 		public void Init(float health)
 		{

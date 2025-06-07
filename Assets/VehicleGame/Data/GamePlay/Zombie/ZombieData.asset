@@ -17,6 +17,7 @@ MonoBehaviour:
     m_SubObjectName: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
-  <RunSpeed>k__BackingField: 2
+  <RunSpeed>k__BackingField: 3
   <RotateSpeed>k__BackingField: 180
   <WalkSpeed>k__BackingField: 1
+  <IdleTime>k__BackingField: 1

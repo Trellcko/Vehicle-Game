@@ -9,37 +9,33 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 		[SerializeField] private ZombieAnimator _zombieAnimator;
 
 		[SerializeField] private Vector2 _patrollingOffset;
-		[SerializeField] private float _idleTime;
 
-		[SerializeField] private float _runSpeed;
-		[SerializeField] private float _walkSpeed;
-		[SerializeField] private float _rotateSpeed;
+		public bool HasTarget => _target;
 
-		[SerializeField] private Transform _target;
+		private float _idleTime;
+		private float _runSpeed;
+		private float _walkSpeed;
+		private float _rotateSpeed;
 
-		[SerializeField] private bool _chaseTarget;
-
+		private Transform _target;
+		
 		private Vector3 _patrollingPoint;
 		private BetterTimer _idleTimer;
+		private bool _isMovementStoped;
 
 		private void Start()
 		{
 			_patrollingPoint = transform.position;
-			_idleTimer = new(_idleTime, offset: 0.1f);
-			_idleTimer.Completed += CalculateNewPatrolPosition;
-		}
-
-		private void CalculateNewPatrolPosition()
-		{
-			_patrollingPoint.x += Random.Range(-_patrollingOffset.x, _patrollingOffset.x);
-			_patrollingPoint.z += Random.Range(-_patrollingOffset.y, _patrollingOffset.y);
 		}
 
 		private void Update()
 		{
+			if(_isMovementStoped)
+				return;
+			
 			_idleTimer.Tick();
 			
-			if (_target && _chaseTarget)
+			if (_target)
 			{
 				_idleTimer.Pause();
 				MoveToTarget();
@@ -48,6 +44,50 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 			{
 				Patrols();
 			}
+		}
+
+		public void SetTarget(Transform target)
+		{
+			_target = target;
+		}
+		
+		public void Init(float runSpeed, float walkSpeed, float rotateSpeed, float idleTime)
+		{
+			_idleTime = idleTime;
+			
+			_runSpeed = runSpeed;
+			_walkSpeed = walkSpeed;
+			_rotateSpeed = rotateSpeed;
+			
+			InitTimer();
+		}
+
+		public void EnableMovement()
+		{
+			_isMovementStoped = false;
+		}
+		
+		public void StopMovement()
+		{
+			_isMovementStoped = true;
+		}
+		
+		public void Release()
+		{
+			_target = null;
+			EnableMovement();
+		}
+
+		private void InitTimer()
+		{
+			_idleTimer = new(_idleTime, offset: 0.1f);
+			_idleTimer.Completed += CalculateNewPatrolPosition;
+		}
+
+		private void CalculateNewPatrolPosition()
+		{
+			_patrollingPoint.x += Random.Range(-_patrollingOffset.x, _patrollingOffset.x);
+			_patrollingPoint.z += Random.Range(-_patrollingOffset.y, _patrollingOffset.y);
 		}
 
 		private void Patrols()
@@ -76,14 +116,6 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 			Rotate(_target.position);
 		}
 
-		public void Init(float runSpeed, float walkSpeed, float rotateSpeed, Transform target)
-		{
-			_target = target;
-			_runSpeed = runSpeed;
-			_walkSpeed = walkSpeed;
-			_rotateSpeed = rotateSpeed;
-		}
-		
 		private void Rotate(Vector3 to)
 		{
 			Vector3 direction = (to - transform.position).normalized;

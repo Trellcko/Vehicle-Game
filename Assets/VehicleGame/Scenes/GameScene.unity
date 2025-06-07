@@ -726,7 +726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c043484511562b449821aa55ac2e202, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _spawnDistanceFromCarMinMaxZ: {x: 50, y: 70}
+  _spawnDistanceFromCarMinMaxZ: {x: 60, y: 80}
   _spawnDistanceMinMaxX: {x: -10, y: 10}
   _spawnDistanceThreshold: 10
   _count: {x: 1, y: 3}
