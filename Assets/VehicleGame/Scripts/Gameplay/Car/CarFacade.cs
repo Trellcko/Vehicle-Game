@@ -1,4 +1,4 @@
-﻿using Trell.VehicleGame.GamePlay.Car.Turret;
+﻿using Trell.VehicleGame.GamePlay.Car.Projectile;
 using UnityEngine;
 
 namespace Trell.VehicleGame.GamePlay.Car

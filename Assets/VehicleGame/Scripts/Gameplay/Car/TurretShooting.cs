@@ -2,7 +2,7 @@ using Constants;
 using Trell.VehicleGame.Infrastructure.Input;
 using UnityEngine;
 
-namespace Trell.VehicleGame.GamePlay.Car.Turret
+namespace Trell.VehicleGame.GamePlay.Car.Projectile
 {
 	public class TurretShooting : MonoBehaviour
 	{
@@ -10,6 +10,8 @@ namespace Trell.VehicleGame.GamePlay.Car.Turret
 
 		private UnityEngine.Camera _camera;
 
+		private bool _isWorking = false;
+		
 		private void Awake()
 		{
 			_camera = UnityEngine.Camera.main;
@@ -28,6 +30,11 @@ namespace Trell.VehicleGame.GamePlay.Car.Turret
 
 		private void OnClicked(Vector2 obj)
 		{
+			if (!_isWorking)
+			{
+				_isWorking = true;
+				return;
+			}
 			Ray ray =  _camera.ScreenPointToRay(obj);
 
 			if (Physics.Raycast(ray, out RaycastHit hit, 1000f, LayerNames.GroundLayer))
