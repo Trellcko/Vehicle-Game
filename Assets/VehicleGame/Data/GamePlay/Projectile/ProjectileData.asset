@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23b39094958b426f9f77702370103705, type: 3}
   m_Name: ProjectileData
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 20000
+  <Speed>k__BackingField: 200
   <Damage>k__BackingField: 50
   <AssetReference>k__BackingField:
     m_AssetGUID: 6ebbb1f3457bb2543944954f6911e9d8
