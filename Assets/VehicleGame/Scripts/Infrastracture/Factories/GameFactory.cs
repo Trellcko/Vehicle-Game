@@ -32,10 +32,12 @@ namespace Trell.VehicleGame.Infrastructure.Factories
 
         private GameObject _projectileParent;
         private GameObject _zombieParent;
-        
+        private DiContainer _container;
+
         [Inject]
-        public GameFactory(IAssetProvider assetProvider, IStaticDataService staticDataService, IInput input)
+        public GameFactory(DiContainer container, IAssetProvider assetProvider, IStaticDataService staticDataService, IInput input)
         {
+            _container = container;
             _input = input;
             _assetProvider = assetProvider;
             _staticDataService = staticDataService;
@@ -46,13 +48,17 @@ namespace Trell.VehicleGame.Infrastructure.Factories
         public async Task<GameObject> CreateWinPopup()
         {
             GameObject prefab = await _assetProvider.Load<GameObject>("WinPopup");
-            return Object.Instantiate(prefab);
+            GameObject winPopup = Object.Instantiate(prefab);
+            _container.InjectGameObject(winPopup);
+            return winPopup;
         }
 
         public async Task<GameObject> CreateLosePopup()
         {
             GameObject prefab = await _assetProvider.Load<GameObject>("LosePopup");
-            return Object.Instantiate(prefab);
+            GameObject losePopup = Object.Instantiate(prefab);
+            _container.InjectGameObject(losePopup);
+            return losePopup;
         }
         
         public async Task<ProjectileFacade> CreateProjectile(Vector3 position, Vector3 direction)

@@ -16,7 +16,7 @@ namespace Trell.VehicleGame.GamePlay.Car
 
 			else if (other.TryGetComponent(out ProjectileCollisionEventInvoker projectileCollisionEventInvoker))
 			{
-				projectileCollisionEventInvoker.GetComponentInParent<ProjectileFacade>().ProjectileDestroyer.ReturnToPool();
+				projectileCollisionEventInvoker.GetComponent<ProjectileFacade>().ProjectileDestroyer.ReturnToPool();
 			}
 		}
 	}

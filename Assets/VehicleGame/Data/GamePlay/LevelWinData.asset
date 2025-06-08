@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4d7c196fdc826e48996a70fb2c5dbb4, type: 3}
   m_Name: LevelWinData
   m_EditorClassIdentifier: 
-  <DistanceToWin>k__BackingField: 100
+  <DistanceToWin>k__BackingField: 300
