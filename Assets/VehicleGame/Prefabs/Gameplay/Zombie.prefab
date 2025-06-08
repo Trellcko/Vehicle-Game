@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1433793151765027460}
-  - component: {fileID: 1595590307948855800}
   - component: {fileID: 8007698790774402570}
   - component: {fileID: 4480638499721593359}
+  - component: {fileID: 2994304603673504885}
   m_Layer: 8
   m_Name: ZombieCollisionEventInvoker
   m_TagString: Untagged
@@ -34,27 +34,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 596121695238655089}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &1595590307948855800
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462660286335087954}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.53, y: 1.24, z: 0.72}
-  m_Center: {x: 0, y: 0.66, z: 0}
 --- !u!54 &8007698790774402570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94,6 +73,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b90048452ce61d468777775fa5f46cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &2994304603673504885
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462660286335087954}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.63
+  m_Height: 2.31
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.71, z: 0}
 --- !u!1 &3849290547640946019
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,7 +329,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.7, y: 0, z: -21.6}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2687884158793752543}
@@ -339,6 +341,7 @@ Transform:
   - {fileID: 1092210120355654984}
   - {fileID: 1433793151765027460}
   - {fileID: 6768557599210046653}
+  - {fileID: 864011277009353217}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2242714160630462321
@@ -464,7 +467,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: {fileID: 4795490124479752175}
-  _healthBar: {fileID: 0}
+  _healthBar: {fileID: 630059021890241720}
+--- !u!1 &7555774753028253932
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 864011277009353217}
+  - component: {fileID: 6286696261541643473}
+  m_Layer: 0
+  m_Name: ZombieDamageHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &864011277009353217
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555774753028253932}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.0919628, y: -0.050834462, z: -1.2701111}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 596121695238655089}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6286696261541643473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7555774753028253932}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75cb14b31b87a704582fd51246a8b009, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderer: {fileID: 5165177296127827078}
+  _health: {fileID: 4795490124479752175}
 --- !u!1 &7817856323386587157
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +570,7 @@ GameObject:
   - component: {fileID: 5110553623037281622}
   - component: {fileID: 2975412854528567207}
   - component: {fileID: 5936595293065759793}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: ZombieChasingTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -669,7 +718,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9b23b3aa7e639874bbac3cc3ef331cdf, type: 2}
+      objectReference: {fileID: 2100000, guid: fbc58d4c85a6a8f46b5e8ac2967bcb3e, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -704,6 +753,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 8335429202193991077}
+--- !u!137 &5165177296127827078 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7307535121243759794, guid: 96327e3cb272b854b83a2d993c1f7a09,
+    type: 3}
+  m_PrefabInstance: {fileID: 2506236819091257396}
+  m_PrefabAsset: {fileID: 0}
 --- !u!95 &8335429202193991077 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5866666021909216657, guid: 96327e3cb272b854b83a2d993c1f7a09,
@@ -828,6 +883,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1532e80996b1b8f429817524c12b1d67, type: 3}
+--- !u!114 &630059021890241720 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2824540467318262276, guid: 1532e80996b1b8f429817524c12b1d67,
+    type: 3}
+  m_PrefabInstance: {fileID: 3426293464025059004}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04593f18512ebc44e99581e4748a2c78, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &4308439539711578316 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1460860831766240880, guid: 1532e80996b1b8f429817524c12b1d67,

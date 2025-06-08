@@ -16,6 +16,13 @@ public class BootstrapInstaller : MonoInstaller
         BindStaticDataService();
         BindGameFactory();
         BindInput();
+        BindGameBehaiour();
+    }
+
+    private void BindGameBehaiour()
+    {
+        Container.BindInterfacesTo<GameBehaviour>()
+            .AsSingle();
     }
 
     private void BindInput()

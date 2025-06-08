@@ -35,10 +35,10 @@ namespace Trell.VehicleGame.GamePlay.Camera
             _startCamera.gameObject.SetActive(false);
         }
         
-        private void OnCarCreated(CarFacade obj)
+        private void OnCarCreated()
         {
             _gameFactory.CarCreated -= OnCarCreated;
-            _startCamera.Follow = _startCamera.LookAt = _gameCamera.Follow = _gameCamera.LookAt = obj.transform;
+            _startCamera.Follow = _startCamera.LookAt = _gameCamera.Follow = _gameCamera.LookAt = _gameFactory.CarFacade.transform;
         }
     }
 }

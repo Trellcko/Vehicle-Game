@@ -27,7 +27,7 @@ namespace Trell.VehicleGame.UI
 		
 		public void UpdateValue(float currentHealth, float maxHealth)
 		{
-			_bg.enabled = _fill.enabled = _temporaryFill.enabled = true;
+			_bg.enabled = _fill.enabled = _temporaryFill.enabled = maxHealth - currentHealth > 0.01f;
 		
 			_temporaryFill.DOKill();
 			

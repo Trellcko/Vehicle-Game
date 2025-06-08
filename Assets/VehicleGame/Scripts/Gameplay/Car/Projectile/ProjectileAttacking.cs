@@ -10,6 +10,7 @@ namespace Trell.VehicleGame
 		[SerializeField] private ProjectileFacade _facade;
 
 		private float _damage;
+		public event Action AttackCompleted;
 
 		private void OnEnable()
 		{
@@ -29,6 +30,7 @@ namespace Trell.VehicleGame
 		private void OnZombieCollided(ZombieFacade obj)
 		{
 			obj.ZombieHealth.TakeDamage(_damage);
+			AttackCompleted?.Invoke();
 		}
 	}
 }

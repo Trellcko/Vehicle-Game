@@ -11,12 +11,12 @@ TagManager:
   - Ground
   - Water
   - UI
-  - GroundBorder
+  - GameBorder
   - Player
   - Enemy
   - Bullet
-  - 
-  - 
+  - GroundTrigger
+  - ZombieChasingTrigger
   - 
   - 
   - 

@@ -44,8 +44,8 @@ GameObject:
   - component: {fileID: 3937520767134275712}
   - component: {fileID: 1897890446456657619}
   - component: {fileID: 198842178441403834}
-  m_Layer: 6
-  m_Name: BorderTrigger
+  m_Layer: 10
+  m_Name: GroundTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -18,20 +18,14 @@ namespace Trell.VehicleGame.Infrastructure.States
 
         public override void  Enter()
         {
-            _sceneService.Load(nameof(SceneNames.GameScene), OnLoaded);
+            _sceneService.Load(SceneName.GameScene, OnLoaded);
+            _factory.CleanUp();
         }
 
         private void OnLoaded()
         {
-            try
-            {
-                _factory.CreateCar();
-                GoToState<GameLoopState>();
-            }
-            catch (Exception e)
-            {
-                Debug.Log(e.Message + "\n" + e.StackTrace);
-            }
+            _factory.CreateCar();
+            GoToState<GameLoopState>();
         }
     }
 }

@@ -46,6 +46,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _carData: {fileID: 11400000, guid: cb904b1575fffd84ea23cc06115d8753, type: 2}
   _zombieData: {fileID: 11400000, guid: 9d4cb379e60919949adfafc997666eb7, type: 2}
+  _projectileData: {fileID: 11400000, guid: ff13fd82d2130994cb601031e047652f, type: 2}
+  _getLevelWinData: {fileID: 11400000, guid: c422fced14ef13a468f46d145aa81456, type: 2}
 --- !u!1 &7710491242512808179
 GameObject:
   m_ObjectHideFlags: 0

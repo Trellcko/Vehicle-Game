@@ -9,11 +9,13 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 		
 		private void OnEnable()
 		{
+			_zombie.ZombieHealth.Died += Die;
 			_zombie.ZombieAttacking.AttackCompleted += Die;
 		}
 
 		private void OnDisable()
 		{
+			_zombie.ZombieHealth.Died -= Die;
 			_zombie.ZombieAttacking.AttackCompleted -= Die;
 		}
 

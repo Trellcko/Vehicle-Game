@@ -22,4 +22,4 @@ MonoBehaviour:
   <WalkSpeed>k__BackingField: 0.5
   <IdleTime>k__BackingField: 2
   <Damage>k__BackingField: 10
-  <Health>k__BackingField: 20
+  <Health>k__BackingField: 100

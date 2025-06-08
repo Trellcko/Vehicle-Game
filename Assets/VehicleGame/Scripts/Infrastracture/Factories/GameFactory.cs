@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using Trell.VehicleGame.GamePlay.Car;
+using Trell.VehicleGame.GamePlay.Car.Projectile;
 using Trell.VehicleGame.GamePlay.Zombie;
 using Trell.VehicleGame.Infrastructure.AssetManagment;
 using Trell.VehicleGame.Infrastructure.Input;
@@ -17,15 +18,19 @@ namespace Trell.VehicleGame.Infrastructure.Factories
         
         private readonly IAssetProvider _assetProvider;
         private readonly IStaticDataService _staticDataService;
-        
+        private readonly IInput _input;
+
         private GameObject _zombiePrefab;
+        private GameObject _projectilePrefab;
+        
         private ZombieData ZombieData => _staticDataService.GetZombieData();
+        private ProjectileData ProjectileData => _staticDataService.GetProjectileData();
         
         private ObjectPool<ZombieFacade> _zombiePool;
-        private IInput _input;
+        private ObjectPool<ProjectileFacade> _projectilePool;
+        public event Action CarCreated;
 
-        public event Action<CarFacade> CarCreated;
-
+        private GameObject _projectileParent;
         private GameObject _zombieParent;
         
         [Inject]
@@ -34,14 +39,39 @@ namespace Trell.VehicleGame.Infrastructure.Factories
             _input = input;
             _assetProvider = assetProvider;
             _staticDataService = staticDataService;
-            CreatePool();
+            CreateZombiePool();
+            CreateProjectilePool();
         }
 
+        public async Task<GameObject> CreateWinPopup()
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>("WinPopup");
+            return Object.Instantiate(prefab);
+        }
+
+        public async Task<GameObject> CreateLosePopup()
+        {
+            GameObject prefab = await _assetProvider.Load<GameObject>("LosePopup");
+            return Object.Instantiate(prefab);
+        }
+        
+        public async Task<ProjectileFacade> CreateProjectile(Vector3 position, Vector3 direction)
+        {
+            _projectilePrefab = await _assetProvider.Load<GameObject>(ProjectileData.AssetReference);
+            ProjectileFacade projectileFacade = _projectilePool.Get();
+            projectileFacade.transform.position = position;
+            projectileFacade.ProjectileMovement.SetDirection(direction);
+            
+            if (!_projectileParent)
+                _projectileParent = new("ProjectileParent");
+            
+            projectileFacade.transform.parent = _projectileParent.transform;
+            return projectileFacade;
+        }
+        
         public async Task<ZombieFacade> CreateZombie(Vector3 position)
         {
-            ZombieData zombieData = _staticDataService.GetZombieData();
-            
-            _zombiePrefab = await _assetProvider.Load<GameObject>(zombieData.AssetReference);
+            _zombiePrefab = await _assetProvider.Load<GameObject>(ZombieData.AssetReference);
             ZombieFacade zombieFacade = _zombiePool.Get();
             zombieFacade.transform.position = position;
 
@@ -62,9 +92,9 @@ namespace Trell.VehicleGame.Infrastructure.Factories
             
             carFacade.CarMovement.Init(carData.Speed);
             carFacade.CarHealth.Init(carData.Health);
-            carFacade.TurretShooting.Init(_input);
+            carFacade.TurretShooting.Init(_input, this);
             CarFacade = carFacade;
-            CarCreated?.Invoke(carFacade);
+            CarCreated?.Invoke();
             return carFacade;
         }
 
@@ -73,7 +103,34 @@ namespace Trell.VehicleGame.Infrastructure.Factories
             _assetProvider.CleanUp();
         }
 
-        private void CreatePool()
+        private void CreateProjectilePool()
+        {
+            _projectilePool = new(() =>
+                {
+                    ProjectileFacade projectileFacade =
+                        Object.Instantiate(_projectilePrefab).GetComponent<ProjectileFacade>();
+                    InitProjectile(projectileFacade);
+                    return projectileFacade;
+                },
+                x =>
+                {
+                    x.gameObject.SetActive(true);
+                    x.TrailRenderer.enabled = false;
+                    x.TrailRenderer.Clear();
+                    x.TrailRenderer.enabled = true;
+                },
+                x => x.gameObject.SetActive(false)
+            );
+        }
+
+        private void InitProjectile(ProjectileFacade projectileFacade)
+        {
+            projectileFacade.ProjectileAttacking.Init(ProjectileData.Damage);
+            projectileFacade.ProjectileMovement.Init(ProjectileData.Speed);
+            projectileFacade.ProjectileDestroyer.Init(_projectilePool);
+        }
+
+        private void CreateZombiePool()
         {
             _zombiePool = new(
                 () =>

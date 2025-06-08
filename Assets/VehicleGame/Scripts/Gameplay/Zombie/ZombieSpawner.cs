@@ -16,7 +16,6 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 		[SerializeField] private Vector2Int _count;
 		
 		private IGameFactory _gameFactory;
-		private CarFacade _car;
 
 		private float _lastSpawnDistance;
 
@@ -24,27 +23,14 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 		private void Construct(IGameFactory gameFactory)
 		{
 			_gameFactory = gameFactory;
-			_gameFactory.CarCreated += OnCarCreated;
 		}
-
-		private void OnDisable()
-		{
-			_gameFactory.CarCreated -= OnCarCreated;
-		}
-
-		private void Start()
-		{	if(!_car)
-				return;
-			
-			SpawnZombies();
-		}
-
+		
 		private void Update()
 		{
-			if(!_car)
+			if(!_gameFactory.CarFacade)
 				return;
 			
-			if (_car.transform.position.z > _lastSpawnDistance)
+			if (_gameFactory.CarFacade.transform.position.z > _lastSpawnDistance)
 			{
 				_lastSpawnDistance += _spawnDistanceThreshold;
 				SpawnZombies();
@@ -64,15 +50,10 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 			Vector3 spawnPosition =	new()
 			{
 				x = Random.Range(_spawnDistanceMinMaxX.x, _spawnDistanceMinMaxX.y),
-				z = Random.Range(_car.transform.position.z + _spawnDistanceFromCarMinMaxZ.x,
-					_car.transform.position.z + _spawnDistanceFromCarMinMaxZ.y)
+				z = Random.Range(_gameFactory.CarFacade.transform.position.z + _spawnDistanceFromCarMinMaxZ.x,
+					_gameFactory.CarFacade.transform.position.z + _spawnDistanceFromCarMinMaxZ.y)
 			};
 			return spawnPosition;
-		}
-		
-		private void OnCarCreated(CarFacade obj)
-		{
-			_car = obj;
 		}
 	}
 }

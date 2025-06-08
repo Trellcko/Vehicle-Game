@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace Trell.VehicleGame.GamePlay.Car.Projectile
@@ -9,5 +8,6 @@ namespace Trell.VehicleGame.GamePlay.Car.Projectile
 		[field: SerializeField] public ProjectileCollisionEventInvoker ProjectileCollisionEventInvoker { get; private set; }
 		[field: SerializeField] public ProjectileAttacking ProjectileAttacking { get; private set; }
 		[field: SerializeField] public ProjectileDestroyer ProjectileDestroyer { get; private set; }
+		[field: SerializeField] public TrailRenderer TrailRenderer { get; private set; }
 	}
 }

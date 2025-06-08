@@ -10,6 +10,7 @@ namespace Trell.VehicleGame.GamePlay
 
 		public float CurrentHealth { get; private set; }
 
+		public event Action Inited;
 		public event Action Damaged;
 		public event Action Died;
 
@@ -27,6 +28,7 @@ namespace Trell.VehicleGame.GamePlay
 		public void Init(float health)
 		{
 			MaxHealth = CurrentHealth = health;
+			Inited?.Invoke();
 		}
 
 		public void TakeDamage(float damage)

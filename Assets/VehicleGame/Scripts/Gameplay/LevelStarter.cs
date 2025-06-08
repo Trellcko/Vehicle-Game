@@ -10,6 +10,7 @@ namespace Trell.VehicleGame.GamePlay
 {
 	public class LevelStarter : MonoBehaviour
 	{
+		[SerializeField] private GameObject _levelBar;
 		[SerializeField] private CameraSwitcher _cameraSwitcher;
 		
 		private IInput _input;
@@ -25,22 +26,28 @@ namespace Trell.VehicleGame.GamePlay
 			_gameFactory.CarCreated += OnCarCreated;
 		}
 
+		private void Awake()
+		{
+			_levelBar.gameObject.SetActive(false);
+		}
+
 		private void OnDisable()
 		{
 			_input.Clicked -= OnClicked;
 			_gameFactory.CarCreated -= OnCarCreated;
 		}
 
-		private void OnCarCreated(CarFacade obj)
+		private void OnCarCreated()
 		{
 			_gameFactory.CarCreated -= OnCarCreated;
-			_car = obj;
+			_car = _gameFactory.CarFacade;
 			_input.Clicked += OnClicked;
 		}
 
 		private void OnClicked(Vector2 obj)
 		{
 			_input.Clicked -= OnClicked;
+			_levelBar.SetActive(true);
 			_car.CarMovement.StartMovement();
 			_cameraSwitcher.SwitchToGameCamera();
 		}

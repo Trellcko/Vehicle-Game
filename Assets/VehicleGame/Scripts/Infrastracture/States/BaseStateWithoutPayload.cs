@@ -1,6 +1,3 @@
-using System.Threading.Tasks;
-using Trell.VehicleGame.Infrastructure;
-
 namespace Trell.VehicleGame.Infrastructure.States
 {
     public abstract class BaseStateWithoutPayload : BaseState

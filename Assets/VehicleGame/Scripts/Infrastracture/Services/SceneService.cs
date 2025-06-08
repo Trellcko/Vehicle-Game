@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Threading.Tasks;
+using Constants;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,11 +11,11 @@ namespace Trell.VehicleGame.Infrastructure
     {
         public string CurrentScene => SceneManager.GetActiveScene().name;
         
-        public async void Load(string sceneName, Action onLoaded = null)
+        public async void Load(SceneName sceneName, Action onLoaded = null)
         {
             try
             {
-                AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(sceneName);
+                AsyncOperation waitNextScene = SceneManager.LoadSceneAsync(sceneName.ToString());
 
                 while (!waitNextScene.isDone)
                 {

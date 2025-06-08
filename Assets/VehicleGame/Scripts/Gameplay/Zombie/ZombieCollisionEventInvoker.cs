@@ -16,13 +16,5 @@ namespace Trell.VehicleGame.GamePlay.Zombie
 				CarCollided?.Invoke();
 			}
 		}
-
-		private void OnTriggerStay(Collider other)
-		{			
-			if (other.TryGetComponent(out CarFacade carFacade))
-			{
-				Debug.Log("Lox");
-			}
-		}
 	}
 }
